@@ -6,10 +6,13 @@ import {
   Patch,
   Param,
   Delete,
+  ParseIntPipe,
+  Put,
 } from '@nestjs/common';
 import { EquipmentService } from './equipment.service';
 import { CreateEquipmentDto } from './dto/create-equipment.dto';
-import { UpdateEquipmentDto } from './dto/update-patch-equipment.dto';
+import { UpdatePutEquipmentDto } from './dto/update-put-equipment.dto';
+import { UpdatePatchEquipmentDto } from './dto/update-patch-equipment.dto';
 
 @Controller('equipment')
 export class EquipmentController {
@@ -30,12 +33,20 @@ export class EquipmentController {
     return this.equipmentService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateEquipmentDto: UpdateEquipmentDto,
+  @Put(':id')
+  async update(
+    @Body() updatePutEquipmentDto: UpdatePutEquipmentDto,
+    @Param('id', ParseIntPipe) id: number,
   ) {
-    return this.equipmentService.update(+id, updateEquipmentDto);
+    return this.equipmentService.update(id, updatePutEquipmentDto);
+  }
+
+  @Patch(':id')
+  async updateParcial(
+    @Body() updatePatchEquipmentDto: UpdatePatchEquipmentDto,
+    @Param('id', ParseIntPipe) id: number,
+  ) {
+    return this.equipmentService.updateParcial(id, updatePatchEquipmentDto);
   }
 
   @Delete(':id')
