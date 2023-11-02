@@ -1,4 +1,6 @@
 import { DataSourceOptions } from 'typeorm';
+import { Usuario } from './user/entities/user-entity';
+import { Equipment } from './equipment/entities/equipment.entity';
 
 export const config: DataSourceOptions = {
   type: 'mysql',
@@ -6,7 +8,7 @@ export const config: DataSourceOptions = {
   port: 3306,
   username: 'root',
   password: 'root',
-  database: 'preventiva_nobreak',
-  entities: [__dirname + '/**/*.entity{.ts,.js}'],
+  database: 'teste2',
+  entities: [__dirname + '/**/*.entity{.ts,.js}', Usuario, Equipment],
   synchronize: true,
 };
