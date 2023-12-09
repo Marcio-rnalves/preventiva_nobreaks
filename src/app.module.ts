@@ -1,12 +1,18 @@
-import { Module } from '@nestjs/common';
+import { Module, forwardRef } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { EquipmentModule } from './equipment/equipment.module';
-import { config } from './ormconfig';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsuarioModule } from './user/user.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { config } from './ormconfig';
+import { AuthModule } from './auth/auth.module';
+import { ConfigModule } from '@nestjs/config';
+
 @Module({
-  imports: [EquipmentModule, UsuarioModule, TypeOrmModule.forRoot(config)],
+  imports: [
+    ConfigModule.forRoot(),
+    forwardRef(() => UsuarioModule), 
+    forwardRef(() => AuthModule), 
+    TypeOrmModule.forRoot(config)],
   controllers: [AppController],
   providers: [AppService],
 })
