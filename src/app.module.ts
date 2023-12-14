@@ -6,14 +6,21 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { config } from './ormconfig';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
+import { EquipmentModule } from './equipment/equipment.module';
+import { JwtModule, JwtService } from '@nestjs/jwt';
+import { APP_GUARD } from '@nestjs/core';
+import { AuthGuard } from './guards/auth.guard';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    forwardRef(() => UsuarioModule), 
+    forwardRef(() => UsuarioModule,), 
     forwardRef(() => AuthModule), 
-    TypeOrmModule.forRoot(config)],
+    TypeOrmModule.forRoot(config),EquipmentModule, JwtModule],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, {
+    provide: APP_GUARD,
+    useClass: AuthGuard
+  }],
 })
 export class AppModule {}

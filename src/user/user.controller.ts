@@ -1,19 +1,14 @@
-import {
-  Controller,
-  Post,
-  Body,
-  Get,
-  Param,
-  Put,
-  Patch,
-  Delete,
-  ParseIntPipe,
-} from '@nestjs/common';
+import { Controller,Post,Body,Get,Param,Put,Patch,Delete,ParseIntPipe, UseGuards,} from '@nestjs/common';
 import { CreateUserDTO } from './dto/create-user.dto';
 import { UpdatePutUsuarioDTO } from './dto/update-put-user.dto';
 import { UpdatePatchUsuarioDTO } from './dto/update-patch-user.dto';
 import { UsuarioService } from './user.service';
+import { Roles } from 'src/decorators/roles.decorator';
+import { Role } from 'src/enums/role.enum';
+import { AuthGuard } from 'src/guards/auth.guard';
+import { RoleGuard } from 'src/guards/role.guard';
 
+@Roles(Role.User)
 @Controller('usuarios')
 export class UsuarioController {
   constructor(private readonly usuarioService: UsuarioService) {}
@@ -23,6 +18,7 @@ export class UsuarioController {
     return this.usuarioService.create(createUsuarioDto);
   }
 
+ 
   @Get()
   async listarTodos() {
     return this.usuarioService.findAll();

@@ -1,4 +1,6 @@
-import { IsString, IsEmail, IsStrongPassword } from 'class-validator';
+import { IsString, IsEmail, IsStrongPassword, IsEnum } from 'class-validator';
+import { Role } from 'src/enums/role.enum';
+
 
 export class CreateUserDTO {
   @IsString()
@@ -15,4 +17,7 @@ export class CreateUserDTO {
     minLowercase: 1,
   })
   senha: string;
+
+  @IsEnum(Role)
+  role: Role
 }

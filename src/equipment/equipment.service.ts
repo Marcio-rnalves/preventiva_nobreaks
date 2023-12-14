@@ -5,6 +5,9 @@ import { Equipment } from './entities/equipment.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UpdatePatchEquipmentDto } from './dto/update-patch-equipment.dto';
+import { RoleGuard } from 'src/guards/role.guard';
+import { Role } from 'src/enums/role.enum';
+import { Roles } from 'src/decorators/roles.decorator';
 
 @Injectable()
 export class EquipmentService {
@@ -32,8 +35,9 @@ export class EquipmentService {
   findOne(id: number) {
     return this.equipmentRepository.findOneBy({ id: id });
   }
-
+  @Roles(Role.User)
   remove(id: number) {
-    return this.equipmentRepository.delete(id);
+     this.equipmentRepository.delete(id);
+     return "Equipamento deletado com sucesso!"
   }
 }

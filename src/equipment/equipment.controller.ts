@@ -4,7 +4,7 @@ import { CreateEquipmentDto } from './dto/create-equipment.dto';
 import { UpdatePutEquipmentDto } from './dto/update-put-equipment.dto';
 import { UpdatePatchEquipmentDto } from './dto/update-patch-equipment.dto';
 
-@Controller('equipment')
+@Controller('equipamento')
 export class EquipmentController {
   constructor(private readonly equipmentService: EquipmentService) {}
 

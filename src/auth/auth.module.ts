@@ -9,7 +9,7 @@ import { AuthService } from "./auth.service";
 @Module({
     imports: [
         JwtModule.register({
-            secret: String(process.env.JWT_SECRET)
+            secret: `preventiva`
         }),
         forwardRef(() => UsuarioModule),
         TypeOrmModule.forFeature([Usuario])

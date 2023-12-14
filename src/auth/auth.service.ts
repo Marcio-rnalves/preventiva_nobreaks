@@ -25,7 +25,8 @@ export class AuthService{
             accessToken: this.jwtService.sign({
                 id: user.id,
                 nome: user.nome,
-                email: user.email
+                email: user.email,
+                role: user.role
             }, {
                 expiresIn: "3 days",
                 subject: String(user.id),
@@ -62,7 +63,7 @@ export class AuthService{
                email 
             }
         })
-
+console.log(user)
         if (!user) {
             throw new UnauthorizedException('E-mail ou senha incorretos.');
         }
