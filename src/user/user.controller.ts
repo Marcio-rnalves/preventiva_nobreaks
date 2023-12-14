@@ -5,8 +5,6 @@ import { UpdatePatchUsuarioDTO } from './dto/update-patch-user.dto';
 import { UsuarioService } from './user.service';
 import { Roles } from 'src/decorators/roles.decorator';
 import { Role } from 'src/enums/role.enum';
-import { AuthGuard } from 'src/guards/auth.guard';
-import { RoleGuard } from 'src/guards/role.guard';
 
 @Roles(Role.User)
 @Controller('usuarios')

@@ -32,6 +32,9 @@ export class AuthGuard implements CanActivate {
             return false
         }
 
+        console.log("loginPayload", loginPayload)
+        console.log("authorization", authorization)
+
         return requireRoles.some((role)=> role === loginPayload.role)
     }
 }

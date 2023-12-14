@@ -3,7 +3,11 @@ import { EquipmentService } from './equipment.service';
 import { CreateEquipmentDto } from './dto/create-equipment.dto';
 import { UpdatePutEquipmentDto } from './dto/update-put-equipment.dto';
 import { UpdatePatchEquipmentDto } from './dto/update-patch-equipment.dto';
+import { Roles } from 'src/decorators/roles.decorator';
+import { Role } from 'src/enums/role.enum';
 
+
+@Roles(Role.User)
 @Controller('equipamento')
 export class EquipmentController {
   constructor(private readonly equipmentService: EquipmentService) {}
